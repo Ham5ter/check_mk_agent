@@ -29,7 +29,7 @@ This State just installs the check_mk_agent and xinetd package
 ``check_mk_agent.config``
 ------------
 
-This State manages the COnfigurationfile of xinited that is used to run the check_mk_agent
+This State manages the Configurationfile of xinited that is used to run the check_mk_agent
 
 TODO
 ================
