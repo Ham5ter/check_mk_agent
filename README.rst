@@ -3,6 +3,7 @@ check_mk_agent
 ================
 
 This Saltstack formula manages the Installation of the check_mk_agent and the Configuration of the xinetd Service Configuration.
+Currently the Formula is only tested on Debian.
 
 .. note::
 
@@ -29,3 +30,8 @@ This State just installs the check_mk_agent and xinetd package
 ------------
 
 This State manages the COnfigurationfile of xinited that is used to run the check_mk_agent
+
+TODO
+================
+
+- Add support for Ubuntu, Redhat and other Distributions
