@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'check_mk_agent/defaults.yaml' as default_settings %}
+
+{##
+Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set os_family_map = salt['grains.filter_by']({
+        'Debian': {
+            "xinetd_config": '/etc/xinetd.d/check_mk',
+        },
+  }
+  , grain="os_family"
+  , merge=salt['pillar.get']('check_mk_agent:lookup'))
+%}
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.check_mk_agent.update(os_family_map) %}
+
+{## Merge in check_mk_agent:lookup pillar ##}
+{% set check_mk_agent = salt['pillar.get'](
+        'check_mk_agent',
+        default=default_settings.check_mk_agent,
+        merge=True
+    )
+%}
